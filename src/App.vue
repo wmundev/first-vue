@@ -5,9 +5,17 @@
         <h1>{{hovered}}</h1>
         <h1 v-bind:id="modifyId">i am a modified id bro</h1>
         <HelloWorld msg="Welcome to Your Vue.js App"/>
-        <ButtonCounter></ButtonCounter>
+        <ButtonCounter v-bind:class="classObject"></ButtonCounter>
         <WatchExample/>
         <Heroes></Heroes>
+        <template v-if="ifRender">
+            <h1>if true, render this</h1>
+            <p>nice i can put random stuff here too!</p>
+        </template>
+        <template v-else>
+            <h1>Else, render this</h1>
+            <p>nice i can put random stuff here too!</p>
+        </template>
     </div>
 </template>
 
@@ -28,8 +36,13 @@
         data() {
             return {
                 urlBind: "https://www.google.com",
-                hovered: "rekt"
-
+                hovered: "rekt",
+                // classObject: {
+                //     active: true,
+                //     'text-danger': false
+                // }
+                isActive: false,
+                ifRender: false
             }
         },
         computed: {
@@ -37,6 +50,12 @@
                 get: function () {
                     let a = 1;
                     return a;
+                }
+            },
+            classObject: function () {
+                return {
+                    active: this.isActive && !this.error,
+                    'text-danger': this.error && this.error.type === 'fatal'
                 }
             }
         },
