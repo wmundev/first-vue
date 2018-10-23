@@ -6,8 +6,7 @@ export default {
             }
         ).then((response) => response.json())
             .then((response) => {
-                    console.log(response);
-                    return response.answer;
+                return response;
                 }
             );
     }

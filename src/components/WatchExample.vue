@@ -35,10 +35,15 @@
                     this.answer = 'questions usually contain a question mark';
                     return;
                 }
-                this.answer = "thinking...";
-                this.answer = API.getAnswer();
+                // this.answer = "thinking...";
+                let that = this;
+                //this returns a promise so i can chain
+                API.getAnswer().then((response) => {
+                    that.answer = response.answer;
+                })
             }
-        }
+        },
+        computed: {}
     }
 </script>
 
