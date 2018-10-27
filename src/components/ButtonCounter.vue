@@ -5,16 +5,15 @@
 </template>
 
 <script>
-    export default {
-        name: "ButtonCounter",
-        data() {
-            return {
-                count: 1
-            }
-        }
-    }
+export default {
+  name: "ButtonCounter",
+  data() {
+    return {
+      count: 1
+    };
+  }
+};
 </script>
 
 <style scoped>
-
 </style>
