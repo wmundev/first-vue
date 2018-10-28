@@ -8,7 +8,7 @@
         <ButtonCounter v-bind:class="classObject"></ButtonCounter>
         <!--two way binding example-->
         <WatchExample
-            :title.sync="twoWayTitle"
+                :title.sync="twoWayTitle"
         />
         <Heroes></Heroes>
         <template v-if="ifRender">
@@ -37,6 +37,26 @@
                 v-bind:randomObject="{name: 'Bob', lastName: 'Lamar'}"
                 v-model="customModel"
         />
+        <SlotComponent
+                v-bind:todos="todos"
+        >
+            <template slot="header">
+                <h1>here is a test header that gets passed down to the child component</h1>
+            </template>
+            <template slot="main">
+                <h2>here is the main content of it</h2>
+            </template>
+            <template slot="footer">
+                <blockquote>and here is the footer.</blockquote>
+            </template>
+            <template slot-scope="slotProps">
+                {slotProps.todo.text}
+            </template>
+        </SlotComponent>
+
+        <keep-alive>
+            <component :is="DynamicComponent"> ez gaming</component>
+        </keep-alive>
         <!--https://vuejs.org/v2/guide/components.html#DOM-Template-Parsing-Caveats-->
         <!--<table>-->
         <!--<tr is="aComponent"></tr>-->
@@ -50,15 +70,19 @@
     import ButtonCounter from "./components/ButtonCounter.vue";
     import Heroes from "./components/Heroes.vue";
     import ListRendering from "./components/ListRendering.vue";
+    import SlotComponent from "./components/SlotComponent.vue";
+    import DynamicComponent from "./components/DynamicComponent";
 
     export default {
         name: "app",
         components: {
+            DynamicComponent,
             WatchExample,
             HelloWorld,
             ButtonCounter,
             Heroes,
-            ListRendering
+            ListRendering,
+            SlotComponent
         },
         data() {
             return {
@@ -97,7 +121,12 @@
                     ken: 2,
                     lamar: 3
                 },
-                twoWayTitle: "test two way binding title modify"
+                twoWayTitle: "test two way binding title modify",
+                todos: {
+                    name: 'todo',
+                    bob: 'abc',
+                    text: 'testing slot scope'
+                }
             };
         },
         computed: {
